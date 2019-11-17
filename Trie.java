@@ -7,7 +7,7 @@ public class Trie implements Search {
        
         boolean isEndOfWord; 
           
-        public TrieNode(){ 
+        public TrieNode() { 
             isEndOfWord = false; 
 
             for (int i = 0; i < size; i++) 
@@ -17,19 +17,21 @@ public class Trie implements Search {
        
     TrieNode root = new TrieNode();  
 
-    public void insert(String item){
+    public void insert(String item) {
         int i;
         int length = item.length();
         int index;
         TrieNode current = root;
 
-        for (i = 0; i < length; i++){
+        for (i = 0; i < length; i++) {
             index = item.charAt(i) - 'a';
-            if (index == -58){
+            if (index == -58) {
                 index = 26;
             } 
-            if (current.children[index] == null)
+
+            if (current.children[index] == null) {
                 current.children[index] = new TrieNode();
+            }
 
             current = current.children[index];
         }
@@ -40,60 +42,44 @@ public class Trie implements Search {
         int length = item.length(); 
         int index;
         TrieNode current = root; 
-        //TrieNode previous = root;
         StringBuilder suggest = new StringBuilder();
        
         for (int i = 0; i < length; i++) {
-            //suggest = suggest+item.charAt(i);
             index = item.charAt(i) - 'a';
-            if (index == -58){
+            if (index == -58) {
                 index = 26;
+            }
+
+            if (current.children[index] == null) {
+                return ((suggestion(suggest, current))).toString();
             } 
 
-            //previous = current; 
-            // if (current.children[index] == null){
-            //     if (!current.isEndOfWord){
-            //     //     return suggest.toString();
-            //     // } else {
-            //         return suggestion(suggest, current);
-            //     }
-            // }
-            
-            if (index == 26)
+            if ((current.children[index] != null) && index == 26) {
                 suggest.append((char)39);
-            else 
+                i--;
+            } else {
                 suggest.append((char)(index+97));
+            }
 
-            //suggest.append(index);
             current = current.children[index];
         }
 
-        if (current != null && current.isEndOfWord){
+        if (current != null && current.isEndOfWord) {
             return item;
-        } else {
-            return suggestion(suggest, current);
         }
+        return item;
     } 
 
-    public String suggestion(StringBuilder suggest, TrieNode current){
-        boolean found = false;
+    public String suggestion(StringBuilder suggest, TrieNode current) {
         int index = 0;
 
-        while(!found){
-            for (int i = 0; i < size; i++){
-                if (current.children[i] != null){
-                    index = i;
-                }
-            } 
-            if (index == 26)
-                suggest.append((char)39);
-            else 
+        while(!current.isEndOfWord) {
+            if (current.children[index] != null) {
                 suggest.append((char)(index+97));
-
-            //suggest.append((char)index);
-            current = current.children[index];
-            if(current.isEndOfWord){
-                found = true;
+                current = current.children[index];
+                index = 0;
+            } else {
+                index++;
             }
         }
         return suggest.toString();
