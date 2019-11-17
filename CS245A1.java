@@ -2,10 +2,6 @@ import java.io.*;
 import java.net.*;
 import java.util.Scanner;
 import java.util.Properties​;
-import java.util.ArrayList;
-
-//find returns a str suggestion
-//extra char for apostrophe
 
 public class CS245A1 {
 
@@ -57,7 +53,7 @@ public class CS245A1 {
         if (path != null) {
             if(path.equals("tree")) {
                 //useBST = true;
-                tree = new Tree();;
+                tree = new Tree();
             } else {
                 //useBST = false;
                 tree = new Trie();
@@ -67,25 +63,16 @@ public class CS245A1 {
             tree = new Trie();
         }
 
-        //reads from directory
-        // File jazzy_english = new File("english.0.txt");
-        // Scanner jazzy_scanner = new Scanner(jazzy_english);
-        // jazzy_scanner.useDelimiter("\n");
-
-        // while (jazzy_scanner.hasNextLine()){
-        //    System.out.println(jazzy_scanner.nextLine());
-        // }
-
         //reads from GitHub
         String jazzyEnglish = "https://raw.githubusercontent.com/magsilva/jazzy/master/resource/dict/english.0";
         URL url = new URL(jazzyEnglish);
         Scanner jazzyScanner = new Scanner(url.openStream());
-
+        int counter = 0;
         while (jazzyScanner.hasNextLine()){
             fileLine = jazzyScanner.nextLine();
             if (!fileLine.equals("")) {
                 tree.insert(fileLine.toLowerCase());
-                //System.out.println(fileLine);
+                //System.out.println(fileLine + " " + ++counter);
             }
         }
 

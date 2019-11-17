@@ -20,9 +20,10 @@ public class Tree implements Search {
     }
 
     public String find(String item, TreeNode node) {
-        if (node.left == null && node.right == null) {
-            return node.data;
-        } else if (item.equals(node.data)) {
+       // if (node.left == null && node.right == null) {
+        //    return node.data;
+       // } else 
+        if (item.equals(node.data)) {
             return node.data;
         } else if ((item.compareTo(node.data) < 0) && node.left == null){
             return node.data;
