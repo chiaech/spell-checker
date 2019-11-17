@@ -11,7 +11,7 @@ In this project, I generated a spell checker using external data. I create eithe
   java CS245A1 input.txt output.txt
 
 ## Analysis
-Overall, the trie tree implementation is faster. 
+Overall, the Trie tree implementation is faster. A Trie tree has a runtime of O(m), with m being the length of the word passed in. The Tree tree has a runtime of O(n) because it inserts or finds depending on the size of the data while a Trie tree's insert and find depend on the length of the word and worst case you would have to keep going until the last letter. In addition, you can see in your terminal that it takes longer for the Tree tree implementation to finish than the Trie tree implementation.
 
 ## Extra Credit
 I can read the english.0 file directly from Github.
