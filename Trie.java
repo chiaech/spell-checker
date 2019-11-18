@@ -67,6 +67,10 @@ public class Trie implements Search {
         if (current != null && current.isEndOfWord) {
             return item;
         }
+
+        if (item != ""){
+            return ((suggestion(suggest, current))).toString();
+        }
         return item;
     } 
 
